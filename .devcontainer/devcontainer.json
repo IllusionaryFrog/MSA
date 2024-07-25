@@ -13,11 +13,16 @@
 			"type": "volume"
 		},
 		{
+			"source": "ssh-cache-frog",
+			"target": "/home/vscode/.ssh",
+			"type": "volume"
+		},
+		{
 			"source": "/mnt/f/Media",
 			"target": "/media",
 			"type": "bind"
 		}
-	],
+	]
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -33,6 +38,4 @@
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
-
-	// "appPort": "8080:8080"
 }
