@@ -39,5 +39,5 @@
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 
-	"appPort": 29839
+	"forwardPorts": [29839]
 }

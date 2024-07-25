@@ -15,7 +15,7 @@ fn generate_manifest() {
     let url = Url::parse("https://imgs.search.brave.com/lXc3HFXtbr7MDZWknxiTleICFFrz7TcEFEQM1cd7j30/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS41MDY5/MzczNTkuMDA5OS9m/bGF0LDc1MHgsMDc1/LGYtcGFkLDc1MHgx/MDAwLGY4ZjhmOC51/My5qcGc").unwrap();
     let manifest = Manifest {
         id: "com.illusionaryfrog.msa".to_owned(),
-        version: Version::new(1, 0, 0),
+        version: Version::new(1, 1, 0),
         name: "MSA".to_owned(),
         contact_email: Some("mail@illusionaryfrog.com".to_owned()),
         description: Some("My Stremio Addon".to_owned()),
@@ -24,10 +24,18 @@ fn generate_manifest() {
         types: vec!["movie".to_owned(), "series".to_owned()],
         resources: vec![
             ManifestResource::Short("catalog".to_owned()),
-            ManifestResource::Short("meta".to_owned()),
-            ManifestResource::Short("stream".to_owned()),
+            ManifestResource::Full {
+                name: "meta".to_owned(),
+                id_prefixes: Some(vec!["msa-".to_owned()]),
+                types: Some(vec!["movie".to_owned(), "series".to_owned()]),
+            },
+            ManifestResource::Full {
+                name: "stream".to_owned(),
+                id_prefixes: Some(vec!["msa-".to_owned()]),
+                types: Some(vec!["movie".to_owned(), "series".to_owned()]),
+            },
         ],
-        id_prefixes: Some(vec!["msa-".to_owned()]),
+        id_prefixes: None,
         catalogs: vec![ManifestCatalog {
             id: "msa-catalog".to_owned(),
             r#type: "MSA-Catalog".to_owned(),
@@ -111,7 +119,6 @@ fn generate_resources() {
         let smetas: HashMap<usize, HashMap<usize, SMeta>> = serde_json::from_slice(&smeta).unwrap();
 
         let mut videos = vec![];
-
         for (s, smetas) in smetas.into_iter() {
             for (e, smeta) in smetas.into_iter() {
                 let sid = format!("msa-{:03}{:02}{:02}", id, s, e);
