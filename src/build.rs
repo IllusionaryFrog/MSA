@@ -15,9 +15,9 @@ fn generate_manifest() {
     let url = Url::parse("https://imgs.search.brave.com/lXc3HFXtbr7MDZWknxiTleICFFrz7TcEFEQM1cd7j30/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS41MDY5/MzczNTkuMDA5OS9m/bGF0LDc1MHgsMDc1/LGYtcGFkLDc1MHgx/MDAwLGY4ZjhmOC51/My5qcGc").unwrap();
     let manifest = Manifest {
         id: "com.illusionaryfrog.msa".to_owned(),
-        version: Version::new(1, 1, 1),
+        version: Version::new(1, 1, 2),
         name: "MSA".to_owned(),
-        contact_email: Some("mail@illusionaryfrog.com".to_owned()),
+        contact_email: None,
         description: Some("My Stremio Addon".to_owned()),
         logo: Some(url.clone()),
         background: Some(url),
@@ -40,10 +40,7 @@ fn generate_manifest() {
             id: "msa-catalog".to_owned(),
             r#type: "MSA-Catalog".to_owned(),
             name: Some("Media".to_owned()),
-            extra: ManifestExtra::Short {
-                required: vec![],
-                supported: vec![],
-            },
+            extra: ManifestExtra::Full { props: vec![] },
         }],
         addon_catalogs: vec![],
         behavior_hints: Default::default(),
