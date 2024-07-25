@@ -1,5 +1,4 @@
 use std::fs;
-
 use stremio_core::types::{
     addon::{
         ExtraProp, Manifest, ManifestCatalog, ManifestExtra, ManifestResource, ResourceResponse,
