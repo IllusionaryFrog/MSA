@@ -15,7 +15,7 @@ fn generate_manifest() {
     let url = Url::parse("https://imgs.search.brave.com/lXc3HFXtbr7MDZWknxiTleICFFrz7TcEFEQM1cd7j30/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS41MDY5/MzczNTkuMDA5OS9m/bGF0LDc1MHgsMDc1/LGYtcGFkLDc1MHgx/MDAwLGY4ZjhmOC51/My5qcGc").unwrap();
     let manifest = Manifest {
         id: "com.illusionaryfrog.msa".to_owned(),
-        version: Version::new(1, 1, 0),
+        version: Version::new(1, 1, 1),
         name: "MSA".to_owned(),
         contact_email: Some("mail@illusionaryfrog.com".to_owned()),
         description: Some("My Stremio Addon".to_owned()),
@@ -78,7 +78,7 @@ fn generate_resources() {
                 id,
                 meta,
                 MetaItemPreview {
-                    id: format!("msa-{:03}0101", id),
+                    id: format!("msa-{:04x}{:04x}{:04x}", id, 1, 1),
                     r#type: r#type,
                     name: name,
                     poster: Some(image.clone()),
@@ -121,7 +121,7 @@ fn generate_resources() {
         let mut videos = vec![];
         for (s, smetas) in smetas.into_iter() {
             for (e, smeta) in smetas.into_iter() {
-                let sid = format!("msa-{:03}{:02}{:02}", id, s, e);
+                let sid = format!("msa-{:04x}{:04x}{:04x}", id, s, e);
                 let url = format!(
                     "http://192.168.178.20:29839{}",
                     spath.join(smeta.file).to_str().unwrap()
@@ -171,7 +171,10 @@ fn generate_resources() {
         };
 
         let out = serde_json::to_string(&resource).unwrap();
-        let opath = format!("./docs/meta/{}/msa-{:03}0101.json", meta.r#type, id);
+        let opath = format!(
+            "./docs/meta/{}/msa-{:04x}{:04x}{:04x}.json",
+            meta.r#type, id, 1, 1
+        );
         fs::write(opath, &out).unwrap();
     }
 }
