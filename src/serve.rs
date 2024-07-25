@@ -6,7 +6,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().service(Files::new("/media", "/media").show_files_listing())
     })
-    .bind("0.0.0.0:8080")?
+    .bind("0.0.0.0:29839")?
     .run()
     .await
 }

@@ -116,7 +116,7 @@ fn generate_resources() {
             for (e, smeta) in smetas.into_iter() {
                 let sid = format!("msa-{:03}{:02}{:02}", id, s, e);
                 let url = format!(
-                    "http://192.168.178.20:8080{}",
+                    "http://192.168.178.20:29839{}",
                     spath.join(smeta.file).to_str().unwrap()
                 );
                 let stream = Stream {
