@@ -1,11 +1,11 @@
 [package]
 name = "my-stremio-addon"
-version = "0.1.0"
+version = "1.1.2"
 edition = "2021"
 
 [[bin]]
-name = "build-msa"
-path = "src/build.rs"
+name = "generate"
+path = "src/generate.rs"
 
 [[bin]]
 name = "serve"

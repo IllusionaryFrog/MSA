@@ -123,7 +123,7 @@ fn generate_resources() {
                     "http://192.168.178.20:29839{}",
                     spath.join(smeta.file).to_str().unwrap()
                 );
-                let stream = Stream {
+                let streams = vec![Stream {
                     name: None,
                     description: None,
                     thumbnail: Some(meta.image.clone()),
@@ -132,22 +132,14 @@ fn generate_resources() {
                     },
                     subtitles: vec![],
                     behavior_hints: Default::default(),
-                };
-
-                let streams = ResourceResponse::Streams {
-                    streams: vec![stream.clone()],
-                };
-
-                let out = serde_json::to_string(&streams).unwrap();
-                let opath = format!("./docs/stream/{}/{sid}.json", meta.r#type);
-                fs::write(opath, &out).unwrap();
+                }];
 
                 if meta.r#type == "series" {
                     videos.push(Video {
-                        id: sid,
+                        id: sid.clone(),
                         title: smeta.title,
                         thumbnail: Some(meta.image.clone()),
-                        streams: vec![stream],
+                        streams: streams.clone(),
                         trailer_streams: vec![],
                         overview: None,
                         released: None,
@@ -157,6 +149,14 @@ fn generate_resources() {
                         }),
                     })
                 }
+
+                let streams = ResourceResponse::Streams {
+                    streams: streams,
+                };
+
+                let out = serde_json::to_string(&streams).unwrap();
+                let opath = format!("./docs/stream/{}/{sid}.json", meta.r#type);
+                fs::write(opath, &out).unwrap();
             }
         }
 

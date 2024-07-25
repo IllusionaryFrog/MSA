@@ -1060,7 +1060,7 @@ dependencies = [
 
 [[package]]
 name = "my-stremio-addon"
-version = "0.1.0"
+version = "1.1.2"
 dependencies = [
  "actix-files",
  "actix-web",
