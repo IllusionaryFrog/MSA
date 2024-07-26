@@ -1,16 +1,16 @@
 {
 	"name": "Rust",
-	"image": "mcr.microsoft.com/devcontainers/rust:1-1-bookworm",
+	"dockerFile": "Dockerfile",
 
 	"mounts": [
 		{
-			"source": "cargo-cache-${devcontainerId}",
-			"target": "/usr/local/cargo",
+			"source": "general-cache",
+			"target": "/general-cache",
 			"type": "volume"
 		},
 		{
-			"source": "ssh-cache-frog",
-			"target": "/home/vscode/.ssh",
+			"source": "cargo-cache-${devcontainerId}",
+			"target": "/usr/local/cargo",
 			"type": "volume"
 		},
 		{
