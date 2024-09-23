@@ -1,24 +1,40 @@
 {
-	"name": "Rust",
-	"dockerFile": "Dockerfile",
+    "name": "my-stremio-addon",
+    "dockerFile": "Dockerfile",
 
-	"mounts": [
-		{
-			"source": "general-cache",
-			"target": "/general-cache",
-			"type": "volume"
-		},
-		{
-			"source": "cargo-cache-${devcontainerId}",
-			"target": "/usr/local/cargo",
-			"type": "volume"
-		},
-		{
-			"source": "/mnt/f/Media",
-			"target": "/media",
-			"type": "bind"
-		}
-	],
+    "mounts": [
+        {
+            "source": "general-cache",
+            "target": "/general-cache",
+            "type": "volume"
+        },
+        {
+            "source": "config-cache-${devcontainerId}",
+            "target": "/home/vscode/.config",
+            "type": "volume"
+        },
+        {
+            "source": "local-cache-${devcontainerId}",
+            "target": "/home/vscode/.local",
+            "type": "volume"
+        },
+        {
+            "source": "cargo-cache-${devcontainerId}",
+            "target": "/usr/local/cargo",
+            "type": "volume"
+        },
+        {
+            "source": "/mnt/f/Media",
+            "target": "/media",
+            "type": "bind"
+        }
+    ],
 
-	"forwardPorts": [29839]
+    "onCreateCommand": {
+        "general-cache-owner": "sudo chown vscode -R /general-cache",
+        "config-cache-owner": "sudo chown vscode -R /home/vscode/.config",
+        "local-cache-owner": "sudo chown vscode -R /home/vscode/.local"
+    },
+
+    "forwardPorts": [29839]
 }
