@@ -1,3 +1,4 @@
 {
     "editor.inlayHints.enabled": "off",
+    "editor.codeLens": false,
 }
